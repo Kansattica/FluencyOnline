@@ -4,10 +4,10 @@
 <h1>Welcome!</h1>
 <EditForm Model="@model">
     Code: <br/>
-    <InputTextArea id="code-input" @bind-value:event="oninput" @bind-value="@model.Code" class="form-control codebox" rows="5" />
+    <InputTextArea id="code-input" @bind-value:event="oninput" @bind-value="@model.Code" class="form-control codebox" rows="5" spellcheck="false"/>
 
     Input: <br/>
-    <InputTextArea id="input-input" @bind-value:event="oninput"  @bind-value="@model.Input" class="form-control codebox" rows="5" />
+    <InputTextArea id="input-input" @bind-value:event="oninput"  @bind-value="@model.Input" class="form-control codebox" rows="5" spellcheck="false"/>
 
 </EditForm>
 <CodeOutput @bind-Program="@model.Code" @bind-Input="@model.Input"  />
