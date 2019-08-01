@@ -1,7 +1,7 @@
 ﻿@page "/"
 @using FluencyOnline.Models;
 
-<h1>Hello, world!</h1>
+<h1>Welcome!</h1>
 <EditForm Model="@model">
     Code: <br/>
     <InputTextArea id="code-input" @bind-value:event="oninput" @bind-value="@model.Code" class="form-control codebox" rows="5" />
