@@ -1,12 +1,16 @@
+dist: xenial
+addons:
+  snaps:
+  - name: dotnet-sdk
+    confinement: classic
+    channel: latest/beta
+sudo: required
 language: csharp
-matrix:
-  include:
-  - os: linux
-    mono: none
-    dotnet:	3.0.0-preview7
+mono: none
 
 script:
   - cd ..; git clone https://github.com/Kansattica/Fluency; cd FluencyOnline
+  - sudo snap alias dotnet-sdk.dotnet dotnet
   - dotnet publish --configuration Release
 
 deploy:
@@ -19,4 +23,3 @@ deploy:
   verbose: true
   on:
     branch: master
-    condition: $TRAVIS_OS_NAME = "linux" 
