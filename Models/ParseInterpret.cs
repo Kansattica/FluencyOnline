@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using System;
 using Fluency.Execution;
 using Fluency.Execution.Parsing;
 using System.Collections.Generic;
@@ -10,35 +11,48 @@ namespace FluencyOnline.Models
 {
     public class ParseInterpret : ComponentBase
     {
-
-        private IEnumerable<string> _input;
-        protected IEnumerable<string> Input { set { _input = value; enumerator = null; } }
-
         private IEnumerator<string> enumerator;
+
+        protected Action<Exception> handler;
+
         private Value ReadInput()
         {
-            if (enumerator == null) { enumerator = _input.GetEnumerator(); }
-
             if (enumerator.MoveNext())
             {
                 return new Value(enumerator.Current, FluencyType.String);
             }
             else
             {
-                enumerator = null;
                 return Value.Finished;
             }
             
         }
 
-        protected IEnumerable<string> Go(string program, bool verbose = false)
+        protected bool StringBad(string isgood)
         {
-            if (string.IsNullOrWhiteSpace(program)) { return Enumerable.Empty<string>(); }
+            return string.IsNullOrWhiteSpace(isgood) || isgood.EndsWith(".");
+        }
+
+        protected IEnumerable<string> Go(string program, string input, bool verbose = false)
+        {
+            if (StringBad(program) || StringBad(input)) { return Enumerable.Empty<string>(); }
+
             Parser p = new Parser(verbose: verbose);
 
             Interpreter interp = new Interpreter(p);
 
-            return interp.Execute(program.Split('\n'), ReadInput).Select(x => x.ToString());
+            IEnumerable<string> split = input.Split('\n');
+            enumerator = split.GetEnumerator();
+            try
+            {
+                return interp.Execute(program.Split('\n'), ReadInput).Select(x => x.ToString()).ToArray();
+            }
+            catch (Exception ex)
+            {
+                handler(ex);
+                return new string[0];
+            }
         }
+
     }
 }

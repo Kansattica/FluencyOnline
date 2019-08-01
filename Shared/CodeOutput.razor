@@ -1,8 +1,8 @@
 @using FluencyOnline.Models;
 @inherits ParseInterpret;
 
-<div class="main">
-    @Status <br/>
+<div class="main outputbox">
+    <div>@Status</div><br/>
     @foreach (var outputline in Output)
     {
         @outputline <br/>
@@ -20,28 +20,51 @@
     private EventCallback<string> ProgramChanged {get; set;}
 
     [Parameter]
-    private string InputStr {get; set;}
+    private string Input {get; set;}
 
     [Parameter]
-    private EventCallback<string> InputStrChanged {get; set;}
+    private EventCallback<string> InputChanged {get; set;}
 
     private IEnumerable<string> Output { get; set;} = new string[]{};
     private string Status { get; set;}
 
-    protected override void OnParametersSet()
+    private string oldprog;
+    private string oldinput;
+
+    protected override void OnInit()
     {
-        if (Program == null || InputStr == null) { return; }
-        Input = InputStr.Split('\n');
-        try
-        {
-           Output = Go(Program); 
-        }
-        catch (Exception ex)
-        {
-            Status = "Problem:\n" + ex.ToString();
+        handler = (ex) => {
+            Status = ExtractEx(ex);
             Output = new string[]{};
-        }
+        };
     }
 
+    protected override void OnParametersSet()
+    {
+        if (StringBad(Program) || StringBad(Input)) { return; }
+        //if (!Changed(oldprog, Program) && !Changed(oldinput, Input)) { return; }
 
+        Input = Input.Trim();
+        Status = "";
+        oldprog = Program;
+        oldinput = Input;
+        Output = Go(Program, Input); 
+    }
+
+        private bool Changed(string old, string newStr)
+        {
+            if (old == null || newStr == null) { return true; }
+            return old.Trim().Trim('.', ',', '\\', '/') == newStr.Trim().Trim('.', ',', '\\', '/');
+        }
+
+        private string ExtractEx(Exception ex)
+        {
+            string toReturn = ex.Message;
+            while (ex.InnerException != null)
+            {
+                ex = ex.InnerException;
+                toReturn = string.Concat(toReturn, "\n", ex.Message);
+            }
+            return toReturn;
+        }
 }

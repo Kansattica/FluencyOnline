@@ -16,8 +16,16 @@ app {
     align-items: center;
 }
 
-.codeinput {
-    width: 75%
+.codebox {
+    width: 75%;
+    font-family: monospace;
+}
+
+.outputbox {
+    width: 75%;
+    margin-right: auto;
+    word-wrap: normal;
+    white-space: normal;
 }
 
 .main {
