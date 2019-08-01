@@ -1,0 +1,47 @@
+@using FluencyOnline.Models;
+@inherits ParseInterpret;
+
+<div class="main">
+    @Status <br/>
+    @foreach (var outputline in Output)
+    {
+        @outputline <br/>
+    }
+</div>
+
+@code {
+    [Parameter]
+    private bool Verbose {get; set;}
+
+    [Parameter]
+    private string Program {get; set;}
+
+    [Parameter]
+    private EventCallback<string> ProgramChanged {get; set;}
+
+    [Parameter]
+    private string InputStr {get; set;}
+
+    [Parameter]
+    private EventCallback<string> InputStrChanged {get; set;}
+
+    private IEnumerable<string> Output { get; set;} = new string[]{};
+    private string Status { get; set;}
+
+    protected override void OnParametersSet()
+    {
+        if (Program == null || InputStr == null) { return; }
+        Input = InputStr.Split('\n');
+        try
+        {
+           Output = Go(Program); 
+        }
+        catch (Exception ex)
+        {
+            Status = "Problem:\n" + ex.ToString();
+            Output = new string[]{};
+        }
+    }
+
+
+}

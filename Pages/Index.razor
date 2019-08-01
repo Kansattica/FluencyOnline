@@ -1,0 +1,18 @@
+﻿@page "/"
+@using FluencyOnline.Models;
+
+<h1>Hello, world!</h1>
+<EditForm Model="@model">
+    Code: <br/>
+    <InputTextArea id="code-input" @bind-Value="@model.Code" class="form-control" />
+
+    Input: <br/>
+    <InputTextArea id="input-input" @bind-Value="@model.Input" class="form-control" />
+
+</EditForm>
+<CodeOutput @bind-Program="@model.Code" @bind-InputStr="@model.Input"  />
+
+
+@code {
+    private FluencyModel model {get; set;} = new FluencyModel();
+}
