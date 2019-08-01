@@ -1,0 +1,22 @@
+language: csharp
+matrix:
+  include:
+  - os: linux
+    mono: none
+    dotnet:	3.0.0-preview7
+
+script:
+  - cd ..; git clone https://github.com/Kansattica/Fluency; cd FluencyOnline
+  - dotnet publish --configuration Release
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $push_token
+  local_dir: bin/Release/netstandard2.0/publish/FluencyOnline/dist/
+  repo: Kansattica/FluencyOnline
+  target-branch: gh-pages
+  verbose: true
+  on:
+    branch: master
+    condition: $TRAVIS_OS_NAME = "linux" 
