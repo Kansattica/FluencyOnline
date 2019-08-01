@@ -28,15 +28,8 @@ namespace FluencyOnline.Models
             
         }
 
-        protected bool StringBad(string isgood)
-        {
-            return string.IsNullOrWhiteSpace(isgood) || isgood.EndsWith(".");
-        }
-
         protected IEnumerable<string> Go(string program, string input, bool verbose = false)
         {
-            if (StringBad(program) || StringBad(input)) { return Enumerable.Empty<string>(); }
-
             Parser p = new Parser(verbose: verbose);
 
             Interpreter interp = new Interpreter(p);

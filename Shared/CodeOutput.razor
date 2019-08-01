@@ -28,9 +28,6 @@
     private IEnumerable<string> Output { get; set;} = new string[]{};
     private string Status { get; set;}
 
-    private string oldprog;
-    private string oldinput;
-
     protected override void OnInit()
     {
         handler = (ex) => {
@@ -41,12 +38,9 @@
 
     protected override void OnParametersSet()
     {
-        if (StringBad(Program) || StringBad(Input)) { return; }
-
+        if (string.IsNullOrWhiteSpace(Input) || string.IsNullOrWhiteSpace(Program)) { return; }
         Input = Input.Trim();
         Status = "";
-        oldprog = Program;
-        oldinput = Input;
         Output = Go(Program, Input); 
     }
 
