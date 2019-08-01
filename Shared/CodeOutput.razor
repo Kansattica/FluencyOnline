@@ -42,7 +42,6 @@
     protected override void OnParametersSet()
     {
         if (StringBad(Program) || StringBad(Input)) { return; }
-        //if (!Changed(oldprog, Program) && !Changed(oldinput, Input)) { return; }
 
         Input = Input.Trim();
         Status = "";
@@ -51,20 +50,14 @@
         Output = Go(Program, Input); 
     }
 
-        private bool Changed(string old, string newStr)
+    private string ExtractEx(Exception ex)
+    {
+        string toReturn = ex.Message;
+        while (ex.InnerException != null)
         {
-            if (old == null || newStr == null) { return true; }
-            return old.Trim().Trim('.', ',', '\\', '/') == newStr.Trim().Trim('.', ',', '\\', '/');
+            ex = ex.InnerException;
+            toReturn = string.Concat(toReturn, "\n", ex.Message);
         }
-
-        private string ExtractEx(Exception ex)
-        {
-            string toReturn = ex.Message;
-            while (ex.InnerException != null)
-            {
-                ex = ex.InnerException;
-                toReturn = string.Concat(toReturn, "\n", ex.Message);
-            }
-            return toReturn;
-        }
+        return toReturn;
+    }
 }
