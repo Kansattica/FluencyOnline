@@ -22,7 +22,7 @@
     {
         if (e.Value is string)
         {
-            model.Code = e.Value as string;
+            model.Code = (e.Value as string).Trim();
             int height = model.Code.Count(c => c == '\n') + 1;
             codeHeight = (height < 5) ? 5 : height;
         }

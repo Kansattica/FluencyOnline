@@ -16,7 +16,7 @@ namespace FluencyOnline.Models
             examples = assembly.GetManifestResourceNames()
             .Select(x => (x.Substring(14),ReadEmbeddedFile(assembly.GetManifestResourceStream(x)))) //remove the 14 character long FluencyOnline. at the start of each key
             .ToList();
-            examples.Insert(0, ("Pick an example", ""));
+            examples.Insert(0, ("Pick an example", " "));
         }
 
         private string ReadEmbeddedFile(Stream stream)
