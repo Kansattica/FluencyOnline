@@ -28,10 +28,10 @@ namespace FluencyOnline.Models
             
         }
 
+        private static Parser p = new Parser();
+            
         protected IEnumerable<string> Go(string program, string input, bool verbose = false)
         {
-            Parser p = new Parser(verbose: verbose);
-
             Interpreter interp = new Interpreter(p);
 
             IEnumerable<string> split = input.Split('\n');

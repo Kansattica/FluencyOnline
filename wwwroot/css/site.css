@@ -17,15 +17,17 @@ app {
 }
 
 .codebox {
-    width: 75%;
     font-family: monospace;
 }
 
 .outputbox {
-    width: 75%;
     margin-right: auto;
     word-wrap: normal;
     white-space: normal;
+}
+
+.codeelement {
+    width: 75%
 }
 
 .main {

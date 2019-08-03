@@ -16,4 +16,28 @@
     <ProjectReference Include="..\Fluency\Execution\Execution.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Examples Include="$(MSBuildProjectDirectory)\..\Fluency\Examples\*.fl"/>
+  </ItemGroup>
+
+  <!--<Target Name="CopyExamples" BeforeTargets="BeforeBuild">
+    <Copy  SourceFiles="@(Examples)" 
+          DestinationFolder="$(MSBuildProjectDirectory)/Resources/"
+          SkipUnchangedFiles="true">
+      <Link>FluencyOnline\dist\Examples\%(Filename)%(Extension)</Link> 
+    </Copy>
+  </Target>  -->
+
+  <ItemGroup>
+    <EmbeddedResource Include="@(Examples)" />
+  </ItemGroup>
+
+  <!-- <Target Name="MakeResources" BeforeTargets="BeforeBuild">
+        <Message Text="I'm resourcing!" />
+        <GenerateResource
+            Sources="$(MSBuildProjectDirectory)/Resources/*.fl" >
+        </GenerateResource>
+    </Target>  -->
+
+
 </Project>

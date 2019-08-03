@@ -1,0 +1,18 @@
+@using FluencyOnline.Models
+@inherits ExampleImporter
+
+    <div class="form-group">
+        <select class="form-control codeelement" onchange="@ChangedSelection">
+        @foreach (var kvp in examples)
+        {
+            <option value=@kvp.Code>@kvp.Filename</option>
+        }
+        </select>
+    </div>
+
+@code {
+    private string SelectedCode {get; set;}
+
+    [Parameter]
+    private EventCallback<UIChangeEventArgs> ChangedSelection {get; set;}
+}
