@@ -11,24 +11,18 @@
 
 @code {
     [Parameter]
-    private bool Verbose {get; set;}
+    public bool Verbose {get; set;}
 
     [Parameter]
-    private string Program {get; set;}
+    public string Program {get; set;}
 
     [Parameter]
-    private EventCallback<string> ProgramChanged {get; set;}
-
-    [Parameter]
-    private string Input {get; set;}
-
-    [Parameter]
-    private EventCallback<string> InputChanged {get; set;}
+    public string Input {get; set;}
 
     private IEnumerable<string> Output { get; set;} = new string[]{};
     private string Status { get; set;}
 
-    protected override void OnInit()
+    protected override void OnInitialized()
     {
         handler = (ex) => {
             Status = ExtractEx(ex);

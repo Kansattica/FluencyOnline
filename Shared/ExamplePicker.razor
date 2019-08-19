@@ -2,7 +2,7 @@
 @inherits ExampleImporter
 
     <div class="form-group">
-        <select class="form-control codeelement" onchange="@ChangedSelection">
+        <select class="form-control codeelement" @onchange="OnChange">
         @foreach (var kvp in examples)
         {
             <option value=@kvp.Code>@kvp.Filename</option>
@@ -14,5 +14,5 @@
     private string SelectedCode {get; set;}
 
     [Parameter]
-    private EventCallback<UIChangeEventArgs> ChangedSelection {get; set;}
+    public EventCallback<UIChangeEventArgs> OnChange {get; set;}
 }
