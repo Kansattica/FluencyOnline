@@ -4,11 +4,11 @@
 <h1>Welcome!</h1>
 <EditForm Model="@Model">
     Code: <br/>
-    <InputTextArea id="code-input" @oninput="@((UIChangeEventArgs e) => Model.Code = e.Value as string)"  @bind-Value="@Model.Code" class="form-control codebox codeelement" rows="@codeHeight" spellcheck="false"/>
+    <InputTextArea id="code-input" @oninput="@((ChangeEventArgs e) => Model.Code = e.Value as string)"  @bind-Value="@Model.Code" class="form-control codebox codeelement" rows="@codeHeight" spellcheck="false"/>
     <ExamplePicker OnChange="@ExampleSelected" /> <br/>
 
     Input: <br/>
-    <InputTextArea id="input-input" @oninput="@((UIChangeEventArgs e) => Model.Input = e.Value as string)"  @bind-Value="@Model.Input" class="form-control codebox codeelement" rows="5" spellcheck="false"/>
+    <InputTextArea id="input-input" @oninput="@((ChangeEventArgs e) => Model.Input = e.Value as string)"  @bind-Value="@Model.Input" class="form-control codebox codeelement" rows="5" spellcheck="false"/>
 </EditForm>
 
 <CodeOutput Program="@Model.Code" Input="@Model.Input"  />
@@ -18,7 +18,7 @@
     private FluencyModel Model {get; set;} = new FluencyModel();
     private int codeHeight = 5;
 
-    private void ExampleSelected(UIChangeEventArgs e)
+    private void ExampleSelected(ChangeEventArgs e)
     {
         if (e.Value is string)
         {
