@@ -1,16 +1,11 @@
 os: linux
 dist: xenial
-addons:
-  snaps:
-  - name: dotnet-sdk
-    confinement: classic
-    channel: latest/beta
+dotnet: 3.1
 language: csharp
 mono: none
 
 script:
   - cd ..; git clone https://github.com/Kansattica/Fluency; cd FluencyOnline
-  - sudo snap alias dotnet-sdk.dotnet dotnet
   - dotnet publish --configuration Release
 
 deploy:
