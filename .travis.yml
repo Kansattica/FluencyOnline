@@ -1,4 +1,4 @@
-os: windows
+os: linux
 dotnet: 3.1.101
 language: csharp
 mono: none
