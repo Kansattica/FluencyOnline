@@ -12,7 +12,7 @@ deploy:
   provider: pages
   cleanup: false
   github_token: $push_token
-  local_dir: bin/Release/netstandard2.0/publish/FluencyOnline/dist/
+  local_dir: bin/Release/netstandard2.1/publish/FluencyOnline/dist/
   repo: Kansattica/FluencyOnline
   target_branch: gh-pages
   verbose: true
