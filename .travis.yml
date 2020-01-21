@@ -6,6 +6,7 @@ mono: none
 script:
   - cd ..; git clone https://github.com/Kansattica/Fluency; cd FluencyOnline
   - dotnet publish --configuration Release
+  - ls /home/travis/build/Kansattica/FluencyOnline/bin/Release/netstandard2.1
 
 deploy:
   provider: pages
