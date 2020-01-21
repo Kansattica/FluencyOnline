@@ -1,10 +1,10 @@
+os: linux
 dist: xenial
 addons:
   snaps:
   - name: dotnet-sdk
     confinement: classic
     channel: latest/beta
-sudo: required
 language: csharp
 mono: none
 
@@ -15,11 +15,11 @@ script:
 
 deploy:
   provider: pages
-  skip_cleanup: true
+  cleanup: false
   github_token: $push_token
   local_dir: bin/Release/netstandard2.0/publish/FluencyOnline/dist/
   repo: Kansattica/FluencyOnline
-  target-branch: gh-pages
+  target_branch: gh-pages
   verbose: true
   on:
     branch: master
