@@ -4,7 +4,7 @@ language: csharp
 mono: none
 
 script:
-  - cd ..; git clone https://github.com/Kansattica/Fluency; cd FluencyOnline
+  - cd ..; git clone https://github.com/Kansattica/Fluency --depth 1; cd FluencyOnline
   - dotnet publish --configuration Release
 
 deploy:
@@ -12,7 +12,7 @@ deploy:
   cleanup: false
   skip_cleanup: true
   github_token: $push_token
-  local_dir: bin/Release/netstandard2.1/publish/FluencyOnline/dist/
+  local_dir: bin\Release\netstandard2.1\wwwroot
   repo: Kansattica/FluencyOnline
   target_branch: gh-pages
   verbose: true
